@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
-@RequestMapping("/user-auth")
+@RequestMapping("/auth")
 public class AuthController {
 
     @Autowired
@@ -20,7 +22,12 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> userLogin(@RequestParam String userId, @RequestParam String password) {
-        return   authService.userLogin(userId, password);
+    public ResponseEntity<Map<String, Object>> userLogin(@RequestParam String userId, @RequestParam String password) {
+        return authService.userLogin(userId, password);
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<Map<String, Object>> refreshAccessToken(@RequestParam String refreshToken) {
+        return authService.refreshAccessToken(refreshToken);
     }
 }

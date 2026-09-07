@@ -1,3 +1,5 @@
 services:
   user-service:
     url: http://localhost:8081
+jwt:
+  issuer: enterprise-auth-service
