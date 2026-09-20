@@ -30,4 +30,11 @@ public class AuthController {
     public ResponseEntity<Map<String, Object>> refreshAccessToken(@RequestParam String refreshToken) {
         return authService.refreshAccessToken(refreshToken);
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> userLogout(@RequestParam String refreshToken) {
+        return authService.userLogout(refreshToken);
+    }
+
+
 }

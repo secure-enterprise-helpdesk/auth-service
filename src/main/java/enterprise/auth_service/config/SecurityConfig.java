@@ -20,7 +20,8 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/auth/login",
                                 "/auth/refresh",
-                                "/auth/register"
+                                "/auth/register",
+                                "/internal/auth/login"
                         ).permitAll()
                         .anyRequest().authenticated()
                 );

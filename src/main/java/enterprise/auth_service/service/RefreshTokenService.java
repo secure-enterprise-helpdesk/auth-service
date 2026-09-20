@@ -107,4 +107,14 @@ public class RefreshTokenService {
         secureRandom.nextBytes(bytes);
         return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
     }
+
+    public void revokeRefreshToken(String refreshToken) {
+        String hashedToken = hashToken(refreshToken);
+        RefreshToken tokenEntity = refreshTokenRepository.findByTokenHash(hashedToken)
+                .orElseThrow(() -> new RuntimeException("Invalid or expired refresh token"));
+
+        tokenEntity.setRevoked(true);
+        tokenEntity.setRevokedAt(LocalDateTime.now());
+        refreshTokenRepository.save(tokenEntity);
+    }
 }

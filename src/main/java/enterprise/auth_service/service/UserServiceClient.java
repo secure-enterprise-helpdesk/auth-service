@@ -8,15 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(
-        name = "user-service",
-        url = "${services.user-service.url}"
-)
+@FeignClient(name = "user-service", url = "${services.user-service.url}")
 public interface UserServiceClient {
 
-    @PostMapping("/user-profile/register")
+    @PostMapping("/users/register")
     ResponseEntity<String> createUser(@RequestBody CreateUserProfileRequest request);
 
-    @PostMapping("/user-profile/login")
+    @PostMapping("/users/login")
     public ResponseEntity<ValidateUser> login(@RequestParam String userId);
 }

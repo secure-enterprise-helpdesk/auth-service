@@ -67,4 +67,16 @@ public class JwtTokenService {
                 .parseSignedClaims(token)
                 .getPayload();
     }
+    public String generateServiceToken(String serviceName) {
+        Instant now = Instant.now();
+
+        return Jwts.builder()
+                .subject(serviceName)
+                .claim("service", true)
+                .issuedAt(Date.from(now))
+                .expiration(Date.from(now.plusSeconds(900)))
+                .issuer(issuer)
+                .signWith(privateKey, Jwts.SIG.RS256)
+                .compact();
+    }
 }

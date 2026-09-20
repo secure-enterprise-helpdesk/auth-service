@@ -106,10 +106,11 @@ public class AuthService {
             }
 
             String accessToken = jwtTokenService.generateAccessToken(userId, validateUser.getRole());
+            String refreshTokenB = refreshTokenService.generateRefreshToken("", refreshToken);
 
             Map<String, Object> response = new LinkedHashMap<>();
             response.put("accessToken", accessToken);
-            response.put("refreshToken", refreshToken);
+            response.put("refreshToken", refreshTokenB);
             response.put("tokenType", "Bearer");
             response.put("expiresIn", 900);
 
@@ -117,5 +118,9 @@ public class AuthService {
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
         }
+    }
+
+    public ResponseEntity<String> userLogout(String refreshToken) {
+        return null;
     }
 }
