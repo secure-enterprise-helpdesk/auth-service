@@ -1,0 +1,7 @@
+.git
+.idea
+.vscode
+target
+*.iml
+*.log
+src/main/resources/keys/private_key.pem

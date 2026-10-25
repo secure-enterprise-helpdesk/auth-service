@@ -3,6 +3,7 @@ package enterprise.auth_service.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 
 import java.nio.charset.StandardCharsets;
@@ -16,8 +17,8 @@ import java.util.Base64;
 @Configuration
 public class JwtKeyConfig {
 
-    @Value("classpath:keys/private_key.pem")
-    private Resource privateKeyResource;
+    @Value("${jwt.private-key-location}")
+    private String privateKeyLocation;
 
     @Value("classpath:keys/public_key.pem")
     private Resource publicKeyResource;
@@ -25,7 +26,11 @@ public class JwtKeyConfig {
 
     @Bean
     public PrivateKey privateKey() throws Exception {
-        String key = readPemKey(privateKeyResource, "-----BEGIN PRIVATE KEY-----", "-----END PRIVATE KEY-----");
+        String key = readPemKey(
+                new FileSystemResource(privateKeyLocation),
+                "-----BEGIN PRIVATE KEY-----",
+                "-----END PRIVATE KEY-----"
+        );
 
         byte[] decoded = Base64.getDecoder().decode(key);
 

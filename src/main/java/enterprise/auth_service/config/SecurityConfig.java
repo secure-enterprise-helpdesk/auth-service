@@ -18,6 +18,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
+                                "/actuator/health/liveness",
+                                "/actuator/health/readiness",
                                 "/auth/login",
                                 "/auth/refresh",
                                 "/auth/register",

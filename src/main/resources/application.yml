@@ -1,5 +1,18 @@
 services:
   user-service:
-    url: http://localhost:8081
+    url: ${USER_SERVICE_URL:http://localhost:8081}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      probes:
+        enabled: true
 jwt:
   issuer: enterprise-auth-service
+  private-key-location: ${JWT_PRIVATE_KEY_LOCATION}
+  username: ${TICKET_SERVICE_AUTH_USERNAME}
+  password: ${TICKET_SERVICE_AUTH_PASSWORD}
