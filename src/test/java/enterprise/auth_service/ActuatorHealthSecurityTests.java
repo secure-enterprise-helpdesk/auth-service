@@ -4,9 +4,9 @@ import enterprise.auth_service.config.SecurityConfig;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import java.net.URI;
@@ -60,7 +60,7 @@ class ActuatorHealthSecurityTests {
         return httpClient.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
-    @SpringBootConfiguration
+    @Configuration
     @EnableAutoConfiguration(excludeName = {
             "org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration",
             "org.springframework.boot.hibernate.autoconfigure.HibernateJpaAutoConfiguration",
